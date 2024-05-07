@@ -11,19 +11,23 @@ struct AddView: View {
     
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var listViewModel: ListViewModel
-    @State var textFieldText: String = ""
-    @State var alertTitle: String = ""
-    @State var showAlert: Bool = false
+    @FocusState private var textFieldFocusState: Bool
+    @State private var textFieldText: String = ""
+    @State private var alertTitle: String = ""
+    @State private var showAlert: Bool = false
     
     var body: some View {
         ScrollView {
             VStack {
                 TextField("Type Something here...", text: $textFieldText)
+                    .focused($textFieldFocusState)
                     .padding(.horizontal)
                     .frame(height: 55)
                     .background(Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)))
                     .cornerRadius(10)
-                
+                    .onAppear {
+                        textFieldFocusState = true
+                    }
                 Button(action: saveButtonPressed) {
                     Text("Save".uppercased())
                         .foregroundColor(.white)
@@ -41,7 +45,6 @@ struct AddView: View {
             
         
     }
-    
     
     func saveButtonPressed() {
         if textIsAppropiate() {
