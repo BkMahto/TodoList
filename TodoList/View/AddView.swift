@@ -23,7 +23,7 @@ struct AddView: View {
                     .focused($textFieldFocusState)
                     .padding(.horizontal)
                     .frame(height: 55)
-                    .background(Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)))
+                    .background(Color(uiColor: .secondarySystemBackground))
                     .cornerRadius(10)
                     .onAppear {
                         textFieldFocusState = true
@@ -42,8 +42,6 @@ struct AddView: View {
         }
         .navigationTitle("Add an Item 🖊")
         .alert(alertTitle, isPresented: $showAlert, actions: { })
-            
-        
     }
     
     func saveButtonPressed() {
@@ -63,7 +61,6 @@ struct AddView: View {
         }
         return true
     }
-    
 }
 
 struct AddView_Previews: PreviewProvider {
